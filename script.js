@@ -1,19 +1,14 @@
 
-
 // Variables
 const canvas = document.querySelector('canvas');
+const maximusRadius =100;
+let circleArray = [];
+
+// me devuelve la altura y ancho de la ventana 
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
-const ctx = canvas.getContext('2d');
-const maximusRadius =100;
 
-
-// colores Array
-// https://paletadecolores.online/neon/  paleta de color 
-
-const colorArray = ['#c501e2','#2ef8a0','#f82d97','#fff','#e830ce'];
 // registrar controladores de eventos de cambio de tamaño de la ventana
-
 window.addEventListener('resize', function() {
 	canvas.width = window.innerWidth;
 	canvas.height = window.innerHeight;
@@ -21,8 +16,11 @@ window.addEventListener('resize', function() {
 	init();
 })
 
-// pinta  los circulos 
+// pinta  los circulos en la canvas
 function Circle(x, y, dx, dy, radius) {
+   // colores Array
+   // https://paletadecolores.online/neon/  paleta de color 
+    const colorArray = ['#c501e2','#2ef8a0','#f82d97','#fff','#e830ce'];
 	this.x = x;
 	this.y = y;
 	this.dx = dx;
@@ -33,6 +31,7 @@ function Circle(x, y, dx, dy, radius) {
     
     // pinta los circulos
 	this.draw = function() {
+		const ctx = canvas.getContext('2d');
 		ctx.beginPath();
 		ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
 		ctx.fillStyle = this.color;
@@ -53,23 +52,24 @@ function Circle(x, y, dx, dy, radius) {
 	}
 }
 // crea los circulos 
-let circleArray = [];
 
 function init() {
 	circleArray = [];
-	for (let i = 0; i < 800; i++) {
-		let radius = Math.random() * 30 + 1;
+	for (let i = 0; i < 800; i++) { // me crea mas circulos
+		let radius = Math.random() * 30 + 1; // modifica el tamaño
+		// posicion 
 		let x = Math.random() * (innerWidth - radius * 4) + radius;
 		let y = Math.random() * (innerHeight - radius * 4) + radius;
-		let dx = (Math.random() - 3);
-		let dy = (Math.random() - 3);
+		// velocidad
+		let dx = (Math.random() - 5);
+		let dy = (Math.random() - 5);
 		circleArray.push(new Circle(x, y, dx, dy, radius));
 	}
-    console.log(circleArray);
 }
 
 
 function animate() {
+	const ctx = canvas.getContext('2d');
 	requestAnimationFrame(animate);
 	ctx.clearRect(0, 0, innerWidth, innerHeight);
 
