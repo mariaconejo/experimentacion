@@ -20,6 +20,7 @@ window.addEventListener('resize', function() {
 function Circle(x, y, dx, dy, radius) {
    // colores Array
    // https://paletadecolores.online/neon/  paleta de color 
+   // se usa con this para crear varias instancias de los circulos
     const colorArray = ['#c501e2','#2ef8a0','#f82d97','#fff','#e830ce'];
 	this.x = x;
 	this.y = y;
